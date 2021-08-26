@@ -1,6 +1,44 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400,400i,600,700|Poppins:200,200i,300,300i,400,500,500i,600,700,800,900&display=swap");
 /* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_extend.scss */
+.shadow-card {
+    box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+    -webkit-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+    -moz-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+    -ms-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+}
+
+.date {
+    font-size: 11px;
+}
+
+.comment-text {
+    font-size: 12px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.shadow-none {
+    box-shadow: none;
+}
+
+.name {
+    color: #007bff;
+}
+
+.cursor:hover {
+    color: blue;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.textarea {
+    resize: none;
+}
 
 .media img {
     width: 40px;
@@ -12,13 +50,13 @@
 }
 
 .text-orange {
-    color: #ef3a15 !important;
+    color: #ff5f3f !important;
 }
 
 .btn-orange {
     color: #fff;
-    background-color: #ef3a15;
-    border-color: #ef3a15;
+    background-color: #ff5f3f;
+    border-color: #ff5f3f;
 }
 
 .flex-center-start {

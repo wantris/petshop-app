@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\landing;
 
+use App\ChatRoom;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class authController extends Controller
 {
@@ -53,7 +55,7 @@ class authController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'passwword' => 'required',
+            'password' => 'required',
             'confirm_password' =>  'required|same:password',
         ]);
 
@@ -66,9 +68,20 @@ class authController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
+            $room = new ChatRoom();
+            $room->name = Str::random(20);
+            $room->user_id = $user->id;
+            $room->save();
+
             return redirect()->route('pengguna.auth.login');
         } catch (\Throwable $err) {
             return $err;
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/');
     }
 }

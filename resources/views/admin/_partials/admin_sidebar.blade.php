@@ -9,5 +9,6 @@
       <ul class="sidebar-menu">
         <li><a class="nav-link" href=""><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         <li><a class="nav-link" href="{{route('admin.information.index')}}"><i class="fas fa-tachometer-alt"></i> <span>Informasi Hewan</span></a></li>
+        <li><a class="nav-link" href="{{route('admin.post.index')}}"><i class="fas fa-tachometer-alt"></i> <span>Post</span></a></li>
     </aside>
   </div>

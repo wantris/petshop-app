@@ -14,4 +14,8 @@
     <link rel="stylesheet" href="{{asset('asset-landing/css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('asset-landing/css/slicknav.css')}}">
     <link rel="stylesheet" href="{{asset('asset-landing/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('asset-landing/css/chat.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    

@@ -26,3 +26,25 @@
     <script src="{{asset('asset-landing/js/mail-script.js')}}"></script>
 
     <script src="{{asset('asset-landing/js/main.js')}}"></script>
+    <script src="{{url('assets/notiflix/dist/notiflix-2.7.0.min.js')}}"></script>
+    <script src="{{url('assets/notiflix/dist/notiflix-aio-2.7.0.min.js')}}"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
+    @if (session()->has('failed'))
+        <script>
+        Notiflix.Notify.Failure("{{ Session::get('failed') }}");
+        </script>
+    @endif
+
+    @if (session()->has('success'))
+        <script>
+        Notiflix.Notify.Success("{{ Session::get('success') }}");
+        </script>
+    @endif

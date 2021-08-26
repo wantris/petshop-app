@@ -35,8 +35,8 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
-                                <img src="{{asset('asset-landing/img/logo.png')}}" alt="">
+                            <a href="index.html" class="font-weight-bold text-dark" style="text-decoration: none">
+                                SIPETSHOP
                             </a>
                         </div>
                     </div>
@@ -44,10 +44,11 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a  href="index.html">home</a></li>
+                                    <li><a  href="index.html">Home</a></li>
+                                    <li><a  href="{{route('pengguna.linimasa.index')}}">Lini Masa</a></li>
                                     <li><a href="{{route('pengguna.information.index')}}">Informasi Hewan</a></li>
-                                    <li><a href="about.html">about</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="about.html">Tentang</a></li>
+                                    <li><a href="contact.html">Kontak</a></li>
                                     @if (Session::get('is_pengguna'))
                                         <li>
                                             <div class="dropdown show">
@@ -57,10 +58,13 @@
                                                     <i class="icofont-rounded-down d-inline mt-2 text-secondary" id="arrow-icon"></i>
                                                 </a>
                                                 <div class="dropdown-menu mr-4" aria-labelledby="navbar-menu-login">
-                                                    <a class="dropdown-item text-center px-2 py-2" href="">Dashboard</a>
+                                                    @php
+                                                        $pengguna = \App\User::find(Session::get('id_pengguna'));
+                                                    @endphp
+                                                    <a class="dropdown-item text-center px-2 py-2" href="{{route('pengguna.account.index', $pengguna->username)}}">{{$pengguna->name}}</a>
                                                     <a class="dropdown-item text-center px-2 py-2" href="">Ganti
                                                         Password</a>
-                                                    <a class="dropdown-item text-center px-2 py-2" href="">Sign out</a>
+                                                    <a class="dropdown-item text-center px-2 py-2" href="{{route('pengguna.auth.logout')}}">Sign out</a>
                                                 </div>
                                             </div>
                                         </li>
