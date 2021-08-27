@@ -83,11 +83,26 @@
                                 <div class="col-md-12">
                                     @foreach ($info->commentRef as $comment)
                                         @if (!$comment->parent_id)
-                                            <div class="media mb-5"> <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                                            <div class="media mb-5"> 
+                                                @if ($comment->userRef)
+                                                    @if ($comment->userRef->photo)
+                                                        <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{asset('asset-landing/photo-profil/'.$comment->userRef->photo)}}" />
+                                                    @else
+                                                        <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                    @endif
+                                                @else
+                                                    <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                @endif
                                                 <div class="media-body">
                                                     <div class="row">
                                                         <div class="col-8 d-flex">
-                                                            <h5>{{$comment->userRef->name}}</h5><span class="text-secondary"> - <small>{{$comment->created_at->isoFormat('MMM D, YYYY')}}</small></span>
+                                                            <h5>
+                                                            @if ($comment->userRef)
+                                                                {{$comment->userRef->name}}
+                                                            @else
+                                                                {{$comment->adminRef->name}}
+                                                            @endif    
+                                                            </h5><span class="text-secondary"> - <small>{{$comment->created_at->isoFormat('MMM D, YYYY')}}</small></span>
                                                         </div>
                                                         <div class="col-4">
                                                             <div class="pull-right reply"> <a data-toggle="collapse" href="#comment-box-{{$comment->id}}" role="button" aria-expanded="false" aria-controls="comment-box-{{$comment->id}}"><span><i class="fa fa-reply"></i> reply</span></a> </div>
@@ -110,11 +125,27 @@
                                                     </div>
                                                     @if ($comment->commentChildRef->count() > 0)
                                                         @foreach ($comment->commentChildRef as $child)
-                                                            <div class="media mt-4"> <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                                                            <div class="media mt-4"> <a class="pr-3" href="#">
+                                                                @if ($child->userRef)
+                                                                    @if ($child->userRef->photo)
+                                                                        <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="{{asset('asset-landing/photo-profil/'.$child->userRef->photo)}}" />
+                                                                    @else
+                                                                        <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                                    @endif
+                                                                @else
+                                                                    <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                                @endif
+                                                            </a>
                                                                 <div class="media-body">
                                                                     <div class="row">
                                                                         <div class="col-12 d-flex">
-                                                                            <h5>{{$child->userRef->name}}</h5> <span class="text-secondary">- <small>{{$child->created_at->isoFormat('MMM D, YYYY')}}</small></span>
+                                                                            <h5>
+                                                                                @if ($child->userRef)
+                                                                                    {{$child->userRef->name}}
+                                                                                @else
+                                                                                    {{$child->adminRef->name}}
+                                                                                @endif      
+                                                                            </h5> <span class="text-secondary">- <small>{{$child->created_at->isoFormat('MMM D, YYYY')}}</small></span>
                                                                         </div>
                                                                     </div> {{$child->comment}}.
                                                                 </div>
@@ -196,25 +227,7 @@
    <!-- JS here -->
   @include('landing._partials.js')
 
-   <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            disableDaysOfWeek: [0, 0],
-        //     icons: {
-        //      rightIcon: '<span class="fa fa-caret-down"></span>'
-        //  }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
 
-        });
-        var timepicker = $('#timepicker').timepicker({
-         format: 'HH.MM'
-     });
-   </script>
 </body>
 
 </html>

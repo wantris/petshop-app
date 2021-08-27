@@ -15,7 +15,11 @@ class postCommentController extends Controller
         try {
             $comment = new PostComment();
             $comment->post_id = $request->post_id;
-            $comment->user_id = Session::get('id_pengguna');
+            if (Session::get('id_pengguna')) {
+                $comment->user_id = Session::get('id_pengguna');
+            } else {
+                $comment->admin_id = Session::get('id_admin');
+            }
             $comment->parent_id = null;
             $comment->comment = $request->comment;
             $comment->save();
@@ -35,7 +39,11 @@ class postCommentController extends Controller
         try {
             $comment = new PostComment();
             $comment->post_id = $request->post_id;
-            $comment->user_id = Session::get('id_pengguna');
+            if (Session::get('id_pengguna')) {
+                $comment->user_id = Session::get('id_pengguna');
+            } else {
+                $comment->admin_id = Session::get('id_admin');
+            }
             $comment->parent_id = $request->parent_id;
             $comment->comment = $request->comment;
             $comment->save();

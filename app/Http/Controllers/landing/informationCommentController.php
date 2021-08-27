@@ -12,10 +12,17 @@ class informationCommentController extends Controller
 {
     public function save(Request $request)
     {
+        if (!Session::get('id_pengguna')) {
+            return redirect()->back()->with('failed', 'Anda haru login');
+        }
         try {
             $comment = new InformationComment();
             $comment->pet_information_id = $request->information_id;
-            $comment->user_id = Session::get('id_pengguna');
+            if (Session::get('id_pengguna')) {
+                $comment->user_id = Session::get('id_pengguna');
+            } else {
+                $comment->admin_id = Session::get('id_admin');
+            }
             $comment->parent_id = null;
             $comment->comment = $request->comment;
             $comment->save();
@@ -26,16 +33,24 @@ class informationCommentController extends Controller
 
             return redirect()->back();
         } catch (\Throwable $err) {
-            return $err;
+            return redirect()->back();
         }
     }
 
     public function reply(Request $request)
     {
+        if (!Session::get('id_pengguna')) {
+            return redirect()->back()->with('failed', 'Anda haru login');
+        }
+
         try {
             $comment = new InformationComment();
             $comment->pet_information_id = $request->information_id;
-            $comment->user_id = Session::get('id_pengguna');
+            if (Session::get('id_pengguna')) {
+                $comment->user_id = Session::get('id_pengguna');
+            } else {
+                $comment->admin_id = Session::get('id_admin');
+            }
             $comment->parent_id = $request->parent_id;
             $comment->comment = $request->comment;
             $comment->save();
@@ -46,7 +61,7 @@ class informationCommentController extends Controller
 
             return redirect()->back();
         } catch (\Throwable $err) {
-            return $err;
+            return redirect()->back();
         }
     }
 }

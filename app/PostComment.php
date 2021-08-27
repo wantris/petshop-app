@@ -16,6 +16,11 @@ class PostComment extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function adminRef()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
+
     public function commentChildRef()
     {
         return $this->hasMany(PostComment::class,  'parent_id', 'id');

@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcam_text text-center">
-                        <h3>Blog</h3>
+                        <h3>Artikel</h3>
                     </div>
                 </div>
             </div>
@@ -61,6 +61,7 @@
                                     <ul class="blog-info-link">
                                         <li><a href="#"><i class="fa fa-user"></i> {{$item->adminRef->name}}</a></li>
                                         <li><a href="#"><i class="fa fa-comments"></i> {{$item->comment_count}} Komentar</a></li>
+                                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> {{$item->location}}</a></li>
                                     </ul>
                                 </div>
                             </article>
@@ -129,30 +130,15 @@
     <!--================Blog Area =================-->
 
     <!-- footer_start  -->
-    @include('landing._partials.js')
+    @include('landing._partials.footer')
     <!-- footer_end  -->
 
-    <!-- JS here -->
-    @include('landing._partials.js')
+     {{-- Chat --}}
+     @include('landing._partials.chat')
 
-    <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            disableDaysOfWeek: [0, 0],
-        //     icons: {
-        //      rightIcon: '<span class="fa fa-caret-down"></span>'
-        //  }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
+     <script src="{{ asset('js/app.js') }}"></script>
+     @include('landing._partials.js')
 
-        });
-        var timepicker = $('#timepicker').timepicker({
-         format: 'HH.MM'
-     });
-    </script>
+ 
 </body>
 </html>

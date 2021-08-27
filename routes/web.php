@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing.template');
-});
+Route::get('/', 'landing\homeController@index')->name('home');
 
 // ============================== ADMIN ===============================
 
@@ -31,6 +29,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'post'], function () {
         Route::get('/', 'admin\postController@index')->name('admin.post.index');
+        Route::get('/create', 'admin\postController@create')->name('admin.post.create');
+        Route::post('/create', 'admin\postController@save')->name('admin.post.save');
         Route::post('/validate', 'admin\postController@validatePost')->name('admin.post.validate');
     });
 
@@ -38,6 +38,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'admin\informationController@index')->name('admin.information.index');
         Route::get('/create', 'admin\informationController@create')->name('admin.information.create');
         Route::post('/create', 'admin\informationController@save')->name('admin.information.save');
+        Route::get('/edit/{id}', 'admin\informationController@edit')->name('admin.information.edit');
+        Route::patch('/update/{id}', 'admin\informationController@update')->name('admin.information.update');
+        Route::delete('/delete', 'admin\informationController@delete')->name('admin.information.delete');
+    });
+
+    Route::group(['prefix' => 'message'], function () {
+        Route::get('/', 'admin\messageController@index')->name('admin.message.index');
+        Route::post('/save', 'admin\messageController@save')->name('admin.message.save');
+        Route::get('/fetch/{room_id}', 'admin\messageController@fetchByRoom')->name('admin.message.fetch.byroom');
+        Route::post('/validate', 'admin\messageController@validatemessage')->name('admin.message.validate');
     });
 });
 
@@ -67,11 +77,15 @@ Route::group(['prefix' => 'timeline'], function () {
 
 Route::group(['prefix' => 'account'], function () {
     Route::get('/{username}', 'landing\accountController@index')->name('pengguna.account.index');
+    Route::get('/profile/{username}', 'landing\accountController@profile')->name('pengguna.account.profile');
+    Route::post('/profile/{username}', 'landing\accountController@postProfile')->name('pengguna.account.profile.save');
+
     Route::post('/post/save', 'landing\postController@save')->name('pengguna.account.post.save');
     Route::post('/post/comment/save', 'landing\postCommentController@save')->name('pengguna.account.post.comment.save');
     Route::post('/post/comment/reply', 'landing\postCommentController@reply')->name('pengguna.account.post.comment.reply');
 
     Route::post('/message/save', 'landing\messageController@save')->name('pengguna.account.message.save');
+    Route::get('/message/fetchall', 'landing\messageController@fetchAll')->name('pengguna.account.message.fetchall');
 });
 
 Route::get('/message/try', 'landing\messageController@trySocket')->name('pengguna.try.soccet');

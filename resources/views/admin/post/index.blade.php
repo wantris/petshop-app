@@ -5,7 +5,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <a href="{{route('admin.information.create')}}" class="btn btn-primary mb-3">Tambah Post</a>
+          <a href="{{route('admin.post.create')}}" class="btn btn-primary mb-3">Tambah Feed</a>
           <div class="">
             <table class="table table-bordered table-md" id="table-admin">
               <thead>
@@ -21,7 +21,13 @@
                 @foreach ($posts as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->userRef->name}}</td>
+                        <td>
+                            @if ($item->userRef)
+                                {{$item->userRef->name}}
+                            @else
+                                {{$item->adminRef->name}}
+                            @endif
+                        </td>
                         <td>{{$item->content}}</td>
                         <td>{{$item->created_at->isoFormat('d MMM YYYY')}}</td>
                         <td>

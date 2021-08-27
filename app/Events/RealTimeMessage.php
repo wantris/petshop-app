@@ -5,7 +5,6 @@ namespace App\Events;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
 
 class RealTimeMessage implements ShouldBroadcast
 {
@@ -21,6 +20,6 @@ class RealTimeMessage implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
 
-        return new PrivateChannel('events');
+        return new Channel('events');
     }
 }

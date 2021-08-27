@@ -37,16 +37,12 @@
                             </figure>
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img class="profile-pic" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile">
+                                    @if ($pengguna->photo)
+                                        <img class="profile-pic" id="post-image-avatar" src="{{asset('asset-landing/photo-profil/'.$pengguna->photo)}}" alt="profile">
+                                    @else
+                                        <img class="profile-pic" id="post-image-avatar" src="{{asset('asset-landing/pengguna_icon2.png')}}" alt="profile">
+                                    @endif
                                     <span class="profile-name">{{$pengguna->name}}</span>
-                                </div>
-                                <div class="d-none d-md-block">
-                                    <button class="btn btn-primary btn-icon-text btn-edit-profile">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit btn-icon-prepend">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                        </svg> Edit profile
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -54,11 +50,11 @@
                             <ul class="links d-flex  mt-3 mt-md-0">
                                 <li class="header-link-item d-flex align-items-center active">
                                     <i class="fas fa-stream mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="#">Lini Masa</a>
+                                    <a class="pt-1px d-none d-md-block" href="#" >Lini Masa</a>
                                 </li>
                                 <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                                     <i class="far fa-user mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="#">Profil</a>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.profile', $pengguna->username)}}">Profil</a>
                                 </li>
                             </ul>
                         </div>
@@ -73,18 +69,18 @@
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="card-title mb-0">Tentang</h6>
                             </div>
-                            <p>Hi! Saya adalah pegawai wiraswasta yang hobi dalam memelihara kucing.</p>
+                            <p>{{$pengguna->description}}</p>
                             <div class="mt-3">
                                 <label class="tx-11 font-weight-bold mb-0 text-uppercase">Bergabung:</label>
-                                <p class="text-muted">November 15, 2015</p>
+                                <p class="text-muted">{{$pengguna->created_at->isoFormat('d MMM YYYY')}}</p>
                             </div>
                             <div class="mt-3">
                                 <label class="tx-11 font-weight-bold mb-0 text-uppercase">Alamat:</label>
-                                <p class="text-muted">Indramayu, Indonesia</p>
+                                <p class="text-muted">{{$pengguna->address}}</p>
                             </div>
                             <div class="mt-3">
                                 <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-                                <p class="text-muted">me@nobleui.com</p>
+                                <p class="text-muted">{{$pengguna->email}}</p>
                             </div>
                             <div class="mt-3 d-flex social-links">
                                 <a href="javascript:;" class="btn d-flex align-items-center justify-content-center border mr-2 btn-icon github">
@@ -119,9 +115,12 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-1">
-                                                <img class="rounded-circle mr-4" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                                @if ($pengguna->photo)
+                                                    <img class="rounded-circle mr-4" src="{{asset('asset-landing/photo-profil/'.$pengguna->photo)}}" width="40">
+                                                @else
+                                                    <img class="rounded-circle mr-4" src="{{asset('asset-landing/pengguna_icon2.png')}}" width="40">
+                                                @endif
                                             </div>
-                                        
                                             <div class="col-11">
                                                 <textarea name="content" class="form-control ml-1 shadow-none textarea">Apa yang anda pikirkan</textarea>
                                             </div>
@@ -151,7 +150,11 @@
                                     <div class="card-header">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img class="img-xs rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="">
+                                                @if ($pengguna->photo)
+                                                    <img class="img-xs rounded-circle" src="{{asset('asset-landing/photo-profil/'.$pengguna->photo)}}" alt="">
+                                                @else
+                                                    <img class="img-xs rounded-circle" src="{{asset('asset-landing/pengguna_icon2.png')}}" alt="">
+                                                @endif
                                                 <div class="ml-2 mt-3">
                                                     <p style="margin-bottom: -10% !important;">{{$post->userRef->name}}</p>
                                                     <p class="tx-11 text-muted text-secondary" style="font-size: 13px">{{$post->created_at->isoFormat('d MMM YYYY')}}</p>
@@ -193,11 +196,21 @@
                                                 @if ($post->commentRef->count() > 0)
                                                     @foreach ($post->commentRef as $comment)
                                                         @if (!$comment->parent_id)
-                                                            <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+                                                            @if ($pengguna->photo)
+                                                                <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{asset('asset-landing/photo-profil/'.$pengguna->photo)}}" />
+                                                            @else
+                                                                <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                            @endif
                                                             <div class="media-body" style="font-size: 12px !important">
                                                                 <div class="row">
                                                                     <div class="col-8">
-                                                                        <h5 class="mr-3">{{$comment->userRef->name}}</h5>
+                                                                        <h5 class="mr-3">
+                                                                            @if ($comment->userRef)
+                                                                                {{$comment->userRef->name}}
+                                                                            @else
+                                                                                {{$comment->adminRef->name}}
+                                                                            @endif
+                                                                        </h5>
                                                                     </div>
                                                                     <div class="col-4">
                                                                         <div class="pull-right reply"> <a data-toggle="collapse" href="#comment-box-{{$comment->id}}" role="button" aria-expanded="false" aria-controls="comment-box-{{$comment->id}}"><span><i class="fa fa-reply"></i> reply</span></a> </div>
@@ -220,11 +233,24 @@
                                                                 </div>
                                                                 @if ($comment->commentChildRef->count() > 0)
                                                                     @foreach ($comment->commentChildRef as $childComment)
-                                                                        <div class="media mt-4"> <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                                                                        <div class="media mt-4"> 
+                                                                            <a class="pr-3" href="#">
+                                                                                @if ($pengguna->photo)
+                                                                                    <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="{{asset('asset-landing/photo-profil/'.$pengguna->photo)}}" />
+                                                                                @else
+                                                                                    <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="{{asset('asset-landing/pengguna_icon2.png')}}" />
+                                                                                @endif
+                                                                            </a>
                                                                             <div class="media-body">
                                                                                 <div class="row">
                                                                                     <div class="col-12 d-flex">
-                                                                                        <h5>{{$childComment->userRef->name}}</h5> <span class="text-secondary">- <small>{{$childComment->created_at->isoFormat('MMM D, YYYY')}}</small></span>
+                                                                                        <h5>
+                                                                                            @if ($childComment->userRef)
+                                                                                                {{$childComment->userRef->name}}
+                                                                                            @else
+                                                                                                {{$childComment->adminRef->name}}
+                                                                                            @endif    
+                                                                                        </h5> <span class="text-secondary">- <small>{{$childComment->created_at->isoFormat('MMM D, YYYY')}}</small></span>
                                                                                     </div>
                                                                                 </div> {{$childComment->comment}}.
                                                                             </div>
@@ -262,10 +288,13 @@
 
 
     <!-- footer_start  -->
-    @include('landing._partials.js')
+    @include('landing._partials.footer')
     <!-- footer_end  -->
 
-    <!-- JS here -->
+    {{-- Chat --}}
+    @include('landing._partials.chat')
+
+    <script src="{{ asset('js/app.js') }}"></script>
     @include('landing._partials.js')
 
     <script>
@@ -283,24 +312,6 @@
                 document.getElementById("post-image-upload").src = oFREvent.target.result;
             };
         };
-
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            disableDaysOfWeek: [0, 0],
-        //     icons: {
-        //      rightIcon: '<span class="fa fa-caret-down"></span>'
-        //  }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
-
-        });
-        var timepicker = $('#timepicker').timepicker({
-         format: 'HH.MM'
-     });
     </script>
 </body>
 </html>
