@@ -5,8 +5,8 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-3">
                         <div class="logo">
-                            <a href="index.html" class="font-weight-bold text-dark" style="text-decoration: none">
-                                SIPETSHOP
+                            <a href="{{url('/')}}" class="font-weight-bold text-dark" style="text-decoration: none">
+                                SIPETCARE
                             </a>
                         </div>
                     </div>
@@ -14,8 +14,8 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a  href="index.html">Home</a></li>
-                                    <li><a  href="{{route('pengguna.linimasa.index')}}">Feed</a></li>
+                                    <li><a href="{{url('/')}}">Home</a></li>
+                                    <li><a href="{{route('pengguna.linimasa.index')}}">Feed</a></li>
                                     <li><a href="{{route('pengguna.information.index')}}">Artikel</a></li>
                                     @if (Session::get('is_pengguna'))
                                         <li>

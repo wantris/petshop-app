@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('asset-landing/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset-landing/css/chat.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap4.min.css">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     

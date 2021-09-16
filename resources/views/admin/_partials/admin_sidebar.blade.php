@@ -10,6 +10,7 @@
         <li><a class="nav-link" href="{{route('admin.dashboard.index')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         <li><a class="nav-link" href="{{route('admin.information.index')}}"><i class="far fa-newspaper"></i> <span>Artikel</span></a></li>
         <li><a class="nav-link" href="{{route('admin.post.index')}}"><i class="far fa-newspaper"></i><span>Feed</span></a></li>
+        <li><a class="nav-link" href="{{route('admin.adopt.index')}}"><i class="fas fa-cat"></i><span>Pengajuan Adopsi</span></a></li>
         <li><a class="nav-link" href="{{route('admin.message.index')}}"><i class="far fa-envelope"></i><span>Pesan</span></a></li>
     </aside>
   </div>

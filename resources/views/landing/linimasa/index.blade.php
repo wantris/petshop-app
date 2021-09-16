@@ -57,15 +57,30 @@
                                                             @endif
                                                         </div>
                                                         <div class="col-11">
-                                                            <textarea name="content" class="form-control ml-1 shadow-none textarea">Apa yang anda pikirkan</textarea>
+                                                            <textarea name="content" class="form-control ml-1 mb-2 shadow-none textarea">Apa yang anda pikirkan</textarea>
+                                                            <div class="d-flex">
+                                                                <label for="" class="mr-2">Kategori : </label>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-orange dropdown-toggle" id="category-btn" style="font-size: 13px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Pilih Kategori
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Umum')" href="#">Umum</a>
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Adopsi')" href="#">Adopsi</a>
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Penyelamatan')" href="#">Penyelamatan</a>
+                                                                    </div>
+                                                                    <input type="hidden" name="category" id="category-inp">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <hr>
                                                         </div>
-                                                        <div class="col-12 text-center">
+                                                        <div class="col-12 text-center mb-2">
                                                             <a href="#" onclick="uploadPhoto()" style="text-decoration: none !important"><img class="mr-2" src="{{asset('asset-landing/img/icon/image-icon.svg')}}" width="30" alt=""><span style="font-size: 13px">Upload Foto</span></a>
                                                             <input type="file" name="photo" onchange="displayPhoto()" style="display: none" id="photo-inp">
                                                         </div>
+                                                        
                                                         <div class="col-12">
                                                             <input type="submit" value="Kirim" style="font-size:13px " class="btn btn-orange btn-block mt-3" >
                                                         </div>
@@ -107,13 +122,28 @@
                                                 <div class="mt-2">
                                                     <p class="comment-text">{{$post->content}}</p>
                                                 </div>
+                                                <div class="col-12 mt-2">
+                                                    @if ($post->photo)
+                                                        <img class="img-fluid" src="{{asset('assets/photo-post/'.$post->photo)}}" width="300">
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="bg-white">
                                                 <div class="d-flex flex-row fs-12">
-                                                    <div class="like p-2 cursor"><i class="far fa-thumbs-up"></i><span class="ml-1">Like</span></div>
-                                                    <div class="like p-2 cursor"><a class="text-dark" data-toggle="collapse" href="#comment-container-{{$post->id}}" role="button" aria-expanded="false" aria-controls="comment-container-collapse"><i class="far fa-comments"></i><span class="ml-1">Comment</span></a></div>
-                                                    <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
-                                                    <div class="like p-2 cursor text-primary"><i class="far fa-check-circle "></i><span class="ml-1">Tervalidasi</span></div>
+                                                    @if ($post->category == "Adopsi")
+                                                        @if (!$post->adoptRef->is_adopt)
+                                                            <div class="like p-2 "><a href="{{route('pengguna.adopt.form',['adoptid' => $post->adoptRef->id])}}" class="text-dark"><i class="fas fa-cat"></i><span class="ml-1">Adopsi</span></a></div> 
+                                                        @else
+                                                            <div class="like p-2 text-primary"><i class="fas fa-cat"></i><span class="ml-1">Teradopsi</span></div> 
+                                                        @endif
+                                                        
+                                                    @elseif($post->category == "Penyelamatan")
+                                                        <div class="like p-2  text-primary"><i class="fas fa-user-shield"></i><span class="ml-1">Selamatkan</span></div> 
+                                                    @endif
+                                                    <div class="like p-2 "><i class="far fa-thumbs-up"></i><span class="ml-1">Like</span></div>
+                                                    <div class="like p-2 "><a class="text-dark" data-toggle="collapse" href="#comment-container-{{$post->id}}" role="button" aria-expanded="false" aria-controls="comment-container-collapse"><i class="far fa-comments"></i><span class="ml-1">Comment</span></a></div>
+                                                    <div class="like p-2 "><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                                                    <div class="like p-2  text-primary"><i class="far fa-check-circle "></i><span class="ml-1">Tervalidasi</span></div>
                                                 </div>
                                             </div>
                                             <div class="collapse" id="comment-container-{{$post->id}}">
@@ -261,6 +291,29 @@
         </section>
         <!--================Blog Area =================-->
 
+        {{-- modal --}}
+
+        <!-- Modal -->
+        <div class="modal fade"  id="categoryModal" tabindex="1500" style="z-index: 99999 !important" aria-labelledby="categoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                ...
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
     <!-- footer_start  -->
     @include('landing._partials.footer')
     <!-- footer_end  -->
@@ -286,6 +339,12 @@
                 document.getElementById("post-image-upload").src = oFREvent.target.result;
             };
         };
+
+        const chooseCategory = (type) => {
+            event.preventDefault();
+            $('#category-btn').text(type);
+            $('#category-inp').val(type);
+        }
      </script>
 
 </body>

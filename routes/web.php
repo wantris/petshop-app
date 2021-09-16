@@ -43,6 +43,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/delete', 'admin\informationController@delete')->name('admin.information.delete');
     });
 
+    Route::group(['prefix' => 'adopt'], function () {
+        Route::get('/', 'admin\adoptController@index')->name('admin.adopt.index');
+        Route::get('/submission', 'admin\adoptController@listSubmission')->name('admin.adopt.submission.index');
+        Route::post('/submission/validate', 'admin\adoptController@validateSubmission')->name('admin.adopt.submission.validate');
+    });
+
     Route::group(['prefix' => 'message'], function () {
         Route::get('/', 'admin\messageController@index')->name('admin.message.index');
         Route::post('/save', 'admin\messageController@save')->name('admin.message.save');
@@ -75,6 +81,11 @@ Route::group(['prefix' => 'timeline'], function () {
     Route::get('/', 'landing\liniMasaController@index')->name('pengguna.linimasa.index');
 });
 
+Route::group(['prefix' => 'adopt'], function () {
+    Route::get('/form', 'landing\adoptController@showForm')->name('pengguna.adopt.form');
+    Route::post('/form', 'landing\adoptController@saveForm')->name('pengguna.adopt.form.save');
+});
+
 Route::group(['prefix' => 'account'], function () {
     Route::get('/{username}', 'landing\accountController@index')->name('pengguna.account.index');
     Route::get('/profile/{username}', 'landing\accountController@profile')->name('pengguna.account.profile');
@@ -86,6 +97,12 @@ Route::group(['prefix' => 'account'], function () {
 
     Route::post('/message/save', 'landing\messageController@save')->name('pengguna.account.message.save');
     Route::get('/message/fetchall', 'landing\messageController@fetchAll')->name('pengguna.account.message.fetchall');
+
+    Route::get('/adopt/list', 'landing\adoptController@index')->name('pengguna.adopt.index');
+    Route::get('/adopt/list/submission', 'landing\adoptController@listSubmission')->name('pengguna.adopt.index.submission.list');
+    Route::post('/adopt/list/submission/accept', 'landing\adoptController@acceptSubmission')->name('pengguna.adopt.index.submission.accept');
+
+    Route::get('/adopt/mysubmission', 'landing\adoptController@userSubmissions')->name('pengguna.adopt.submission.index');
 });
 
 Route::get('/message/try', 'landing\messageController@trySocket')->name('pengguna.try.soccet');

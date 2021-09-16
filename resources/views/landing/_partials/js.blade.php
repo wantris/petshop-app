@@ -29,6 +29,9 @@
     <script src="{{url('assets/notiflix/dist/notiflix-2.7.0.min.js')}}"></script>
     <script src="{{url('assets/notiflix/dist/notiflix-aio-2.7.0.min.js')}}"></script>
 
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js"></script>
+
     <script>
         $.ajaxSetup({
             headers: {

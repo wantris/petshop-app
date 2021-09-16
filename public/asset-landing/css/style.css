@@ -8,6 +8,9 @@
     -ms-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
 }
 
+.modal-backdrop{z-index: 1050 !important;}
+.modal{z-index: 1060 !important;}
+
 .date {
     font-size: 11px;
 }

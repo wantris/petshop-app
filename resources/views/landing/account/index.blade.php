@@ -56,6 +56,10 @@
                                     <i class="far fa-user mr-2"></i>
                                     <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.profile', $pengguna->username)}}">Profil</a>
                                 </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <i class="fas fa-cat mr-2"></i>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.adopt.index')}}">Adopsi</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

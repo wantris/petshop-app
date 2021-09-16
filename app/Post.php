@@ -20,4 +20,9 @@ class Post extends Model
     {
         return $this->hasMany(PostComment::class,  'post_id', 'id');
     }
+
+    public function adoptRef()
+    {
+        return $this->hasOne(Adopt::class, 'post_id', 'id');
+    }
 }

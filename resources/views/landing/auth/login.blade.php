@@ -46,7 +46,6 @@
                                 {{ Session::get('failed') }}
                             </div>
                         @endif
-                        <p class="font-weight-bold text-center">Login Pengguna</p>
                         <form action="{{route('pengguna.auth.postLogin')}}" method="post">
                             @csrf
                             <div class="form-group mt-3">

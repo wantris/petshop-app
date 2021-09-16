@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\landing;
 
+use App\Adopt;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -28,12 +29,19 @@ class postController extends Controller
             $post->user_id = Session::get('id_pengguna');
             $post->content = $request->content;
             $post->status = 1;
+            $post->category = $request->category;
             $post->comment_count = 0;
             $post->photo = $namePhoto;
             $post->like_count = 0;
             $post->is_validate = 0;
             $post->admin_id = null;
             $post->save();
+
+            if ($request->category == "Adopsi") {
+                $adopt = new Adopt();
+                $adopt->post_id = $post->id;
+                $adopt->save();
+            }
 
             return redirect()->back()->with('success', 'Posttingan berhasil disimpan, tunggu validasi admin');
         } catch (\Throwable $err) {
