@@ -35,14 +35,14 @@
                             @php
                                 $json_item = json_encode($item);
                             @endphp
-                            <button type="button" onclick="seeDetail({{$json_item}})" class="btn btn-info mr-2" data-toggle="modal" data-target="#detailModal">
+                            <button type="button" onclick="seeDetail({{$json_item}})" class="btn btn-info mr-2 mb-2" data-toggle="modal" data-target="#detailModal">
                                 Detail
                             </button>
                             @if ($item->checked)
                                 @if ($item->adoptRef->is_validated_admin)
-                                    <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 0)" class="btn btn-success d-inline">Tervalidasi</a>
+                                    <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 0)" class="btn btn-success d-inline mb-2">Tervalidasi</a>
                                 @else
-                                    <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 1)" class="btn btn-primary d-inline">Validasi</a>
+                                    <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 1)" class="btn btn-primary d-inline mb-2">Validasi</a>
                                 @endif
                             @endif
                         </div>

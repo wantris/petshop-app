@@ -33,11 +33,11 @@
                             @php
                                 $item_json = json_encode($item);
                             @endphp
-                            <a href="{{route('admin.adopt.submission.index',['adoptid' => $item->adoptRef->id])}}" class="btn btn-info d-inline">Daftar Pengajuan</a>
+                            <a href="{{route('admin.adopt.submission.index',['adoptid' => $item->adoptRef->id])}}" class="btn btn-info d-inline mb-2">Daftar Pengajuan</a>
                             @if ($item->adoptRef->is_validated_admin)
-                                <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 0)" class="btn btn-success d-inline">Tervalidasi</a>
+                                <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 0)" class="btn btn-success d-inline mb-2">Tervalidasi</a>
                             @else
-                                <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 1)" class="btn btn-primary d-inline">Validasi</a>
+                                <a href="#" onclick="validatePost({{$item->adoptRef->id}}, 1)" class="btn btn-primary d-inline mb-2">Validasi</a>
                             @endif
                             <a href="#" onclick="seeDetail({{$item_json}})" class="btn btn-info d-inline">Detail</a>
                             
