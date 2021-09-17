@@ -48,9 +48,9 @@
                         </div>
                         <div class="header-links">
                             <ul class="links d-flex  mt-3 mt-md-0">
-                                <li class="header-link-item d-flex align-items-center">
+                                <li class="header-link-item d-flex align-items-center ">
                                     <i class="fas fa-stream mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="#" >Lini Masa</a>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.index', $pengguna->username)}}" >Lini Masa</a>
                                 </li>
                                 <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center ">
                                     <i class="far fa-user mr-2"></i>
@@ -58,14 +58,18 @@
                                 </li>
                                 <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center active">
                                     <i class="fas fa-cat mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.profile', $pengguna->username)}}">Adopsi</a>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.adopt.index')}}">Adopsi</a>
+                                </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <i class="fas fa-user-shield mr-2"></i>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.animalsave.index')}}">Penyelamatan Hewan</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row profile-body">
+            <div class="row profile-body mb-4">
                 <div class="col-12 mb-2">
                     <div class="card shadow-sm">
                         <div class="card-body">
@@ -82,17 +86,17 @@
                 </div>
                 @foreach ($posts as $post)
                     <div class="col-lg-4">
-                        <div class="card shadow" style="border-radius: 20px">
+                        <div class="card shadow" style="border-radius: 20px; min-height:400px">
                             <div class="card-body">
                                 <div class="mb-2">
                                     @if ($post->photo)
-                                        <img class="img-fluid" src="{{asset('assets/photo-post/'.$post->photo)}}">
+                                        <img class="w-100" src="{{asset('assets/photo-post/'.$post->photo)}}" style="max-height: 250px">
                                     @endif
                                 </div>
                                 <div class="mb-2">
                                     <p >{{$post->content}}</p>
                                 </div>
-                                <div class="mb-2 text-center">
+                                <div class="mb-4 text-center">
                                     @foreach ($post->adoptRef->formRef as $submission)
                                         @if ($submission->adopter_id == Session::get('id_pengguna') && $submission->checked == 1)
                                                 @if($post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
@@ -110,6 +114,9 @@
                                             </button>
                                         @endif
                                     @endforeach
+                                </div>
+                                <div class="text-secondary">
+                                    <small><i class="far fa-user mr-2"></i>{{$post->userRef->name}}</small>
                                 </div>
                             </div>
                         </div>

@@ -49,9 +49,9 @@
                         </div>
                         <div class="header-links">
                             <ul class="links d-flex  mt-3 mt-md-0">
-                                <li class="header-link-item d-flex align-items-center">
+                                <li class="header-link-item d-flex align-items-center ">
                                     <i class="fas fa-stream mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="#" >Lini Masa</a>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.index', $pengguna->username)}}" >Lini Masa</a>
                                 </li>
                                 <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center ">
                                     <i class="far fa-user mr-2"></i>
@@ -59,7 +59,11 @@
                                 </li>
                                 <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center active">
                                     <i class="fas fa-cat mr-2"></i>
-                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.profile', $pengguna->username)}}">Adopsi</a>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.adopt.index')}}">Adopsi</a>
+                                </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <i class="fas fa-user-shield mr-2"></i>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.animalsave.index')}}">Penyelamatan Hewan</a>
                                 </li>
                             </ul>
                         </div>
