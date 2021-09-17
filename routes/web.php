@@ -103,6 +103,9 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('/adopt/list/submission/accept', 'landing\adoptController@acceptSubmission')->name('pengguna.adopt.index.submission.accept');
 
     Route::get('/adopt/mysubmission', 'landing\adoptController@userSubmissions')->name('pengguna.adopt.submission.index');
+
+    Route::get('/animalsave/list', 'landing\animalSaveController@index')->name('pengguna.animalsave.index');
+    Route::post('/animalsave/statusupdate', 'landing\animalSaveController@statusUpdate')->name('pengguna.animalsave.updatestatus');
 });
 
 Route::get('/message/try', 'landing\messageController@trySocket')->name('pengguna.try.soccet');

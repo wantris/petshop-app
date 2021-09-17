@@ -5,26 +5,25 @@
                 <div class="col-xl-3 col-md-6 col-lg-3">
                     <div class="footer_widget">
                         <h3 class="footer_title">
-                            Contact Us
+                            Kontak Kami
                         </h3>
                         <ul class="address_line">
                             <li>+555 0000 565</li>
-                            <li><a href="#">Demomail@gmail.Com</a></li>
-                            <li>700, Green Lane, New York, USA</li>
+                            <li><a href="#">me@sipetcare.Com</a></li>
+                            <li>Lohbener Indramayu</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-3  col-md-6 col-lg-3">
                     <div class="footer_widget">
                         <h3 class="footer_title">
-                            Our Servces
+                            Fitur Kami
                         </h3>
                         <ul class="links">
-                            <li><a href="#">Pet Insurance</a></li>
-                            <li><a href="#">Pet surgeries </a></li>
-                            <li><a href="#">Pet Adoption</a></li>
-                            <li><a href="#">Dog Insurance</a></li>
-                            <li><a href="#">Dog Insurance</a></li>
+                            <li><a href="#">Chat Admin</a></li>
+                            <li><a href="#">Feed</a></li>
+                            <li><a href="#">Artikel</a></li>
+                            <li><a href="#">Adopsi</a></li>
                         </ul>
                     </div>
                 </div>
@@ -45,12 +44,11 @@
                 <div class="col-xl-3 col-md-6 col-lg-3 ">
                     <div class="footer_widget">
                         <div class="footer_logo">
-                            <a href="#">
-                                <img src="{{asset('asset-landing/img/logo.png')}}" alt="">
+                            <a href="#" class="text-dark font-weight-bold">
+                                SIPETCARE
                             </a>
                         </div>
-                        <p class="address_text">239 E 5th St, New York 
-                            NY 10003, USA
+                        <p class="address_text">Lohbener Indramayu
                         </p>
                         <div class="socail_links">
                             <ul>
@@ -76,22 +74,7 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copy-right_text">
-        <div class="container">
-            <div class="bordered_1px"></div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <p class="copy_right text-center">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                    </p>
                 </div>
             </div>
         </div>

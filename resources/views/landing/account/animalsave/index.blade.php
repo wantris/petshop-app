@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Adopsi Saya</title>
+    <title>Penyelamatan Hewan</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,7 +48,7 @@
                         </div>
                         <div class="header-links">
                             <ul class="links d-flex  mt-3 mt-md-0">
-                                <li class="header-link-item d-flex align-items-center ">
+                                <li class="header-link-item d-flex align-items-center">
                                     <i class="fas fa-stream mr-2"></i>
                                     <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.index', $pengguna->username)}}" >Lini Masa</a>
                                 </li>
@@ -56,11 +56,11 @@
                                     <i class="far fa-user mr-2"></i>
                                     <a class="pt-1px d-none d-md-block" href="{{route('pengguna.account.profile', $pengguna->username)}}">Profil</a>
                                 </li>
-                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center active">
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
                                     <i class="fas fa-cat mr-2"></i>
                                     <a class="pt-1px d-none d-md-block" href="{{route('pengguna.adopt.index')}}">Adopsi</a>
                                 </li>
-                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center active">
                                     <i class="fas fa-user-shield mr-2"></i>
                                     <a class="pt-1px d-none d-md-block" href="{{route('pengguna.animalsave.index')}}">Penyelamatan Hewan</a>
                                 </li>
@@ -70,48 +70,35 @@
                 </div>
             </div>
             <div class="row profile-body">
-                <div class="col-12 mb-2">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                  <a class="nav-link active" href="#">Daftar Adopsi</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" href="{{route('pengguna.adopt.submission.index')}}">Pengajuan Adopsi Saya</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 @foreach ($posts as $post)
                     <div class="col-lg-4">
                         <div class="card shadow" style="border-radius: 20px">
                             <div class="card-body">
                                 <div class="mb-2">
                                     @if ($post->photo)
-                                        <img class="img-fluid" src="{{asset('assets/photo-post/'.$post->photo)}}">
+                                        <img class="img-fluid w-100" src="{{asset('assets/photo-post/'.$post->photo)}}">
                                     @endif
                                 </div>
                                 <div class="mb-2">
                                     <p class="comment-text">{{$post->content}}</p>
                                 </div>
-                                <div class="mb-2 d-flex text-center">
-                                    @if (!$post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
-                                        <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Menunggu pengadopsi">
-                                            <i class="far fa-clock"></i>
-                                        </button>
-                                    @elseif($post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
-                                        <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Menunggu validasi admin">
-                                            <i class="fas fa-user-shield"></i>
-                                        </button>
-                                    @else
-                                        <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Sudah teradopsi">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    @endif
-                                    
-                                    <a href="{{route('pengguna.adopt.index.submission.list',['adoptid' => $post->adoptRef->id])}}" data-toggle="tooltip" data-placement="bottom" title="Daftar Pengajuan Adopsi" class="btn btn-primary mr-2"><i class="fas fa-clipboard-list"></i></a>
+                                <div class="mb-2">
+                                    <form action="{{route('pengguna.animalsave.updatestatus')}}" method="post">
+                                        @csrf
+                                        @if (!$post->saveRef->status)
+                                            <input type="hidden" name="status" value="1">
+                                            <input type="hidden" name="save_id" value="{{$post->saveRef->id}}">
+                                            <button type="submit" class="btn btn-primary btn-block">
+                                                Buat sudah terselamatkan
+                                            </button>
+                                        @else
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="hidden" name="save_id" value="{{$post->saveRef->id}}">
+                                            <button type="submit" class="btn btn-success btn-block">
+                                                Terselamatkan
+                                            </button>
+                                        @endif
+                                    </form>
                                 </div>
                             </div>
                         </div>

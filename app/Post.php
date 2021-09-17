@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->hasOne(Adopt::class, 'post_id', 'id');
     }
+
+    public function saveRef()
+    {
+        return $this->hasOne(AnimalSave::class, 'post_id', 'id');
+    }
 }

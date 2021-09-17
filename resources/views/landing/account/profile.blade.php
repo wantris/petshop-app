@@ -57,6 +57,14 @@
                                     <i class="far fa-user mr-2"></i>
                                     <a class="pt-1px d-none d-md-block"  href="#">Profil</a>
                                 </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <i class="fas fa-cat mr-2"></i>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.adopt.index')}}">Adopsi</a>
+                                </li>
+                                <li class="header-link-item ml-3 pl-3 border-left d-flex align-items-center">
+                                    <i class="fas fa-user-shield mr-2"></i>
+                                    <a class="pt-1px d-none d-md-block" href="{{route('pengguna.animalsave.index')}}">Penyelamatan Hewan</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

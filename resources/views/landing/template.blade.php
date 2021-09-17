@@ -126,10 +126,10 @@
                 <div class="col-lg-5">
                     <div class="adapt_help">
                         <div class="section_title">
-                            <h3><span>We need your</span>
-                                help Adopt Us</h3>
-                            <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                            <a href="contact.html" class="boxed-btn3">Contact Us</a>
+                            <h3><span>Kami Butuh Anda</span>
+                                Untuk Mengadopsi Hewan</h3>
+                            <p>Bantuan anda dalam mengadopsi hewan akan akan sangat membantu sekali</p>
+                            <a href="contact.html" class="boxed-btn3">Kontak Kami</a>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="col-lg-8">
                     <div class="contact_text text-center">
                         <div class="section_title text-center">
-                            <h3>Why go with Anipat?</h3>
+                            <h3>Kenapa harus ke SIPETCARE?</h3>
                             <p>Karena kita tahu bahwa bahkan teknologi terbaik pun hanya sebaik orang-orang di belakangnya. Dukungan teknis 24/7.</p>
                         </div>
                         <div class="contact_btn d-flex align-items-center justify-content-center">

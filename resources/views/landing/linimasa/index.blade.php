@@ -138,7 +138,11 @@
                                                         @endif
                                                         
                                                     @elseif($post->category == "Penyelamatan")
-                                                        <div class="like p-2  text-primary"><i class="fas fa-user-shield"></i><span class="ml-1">Selamatkan</span></div> 
+                                                        @if (!$post->saveRef->status)
+                                                            <div class="like p-2 text-primary"><i class="fas fa-user-shield"></i><span class="ml-1">Selamatkan</span></div> 
+                                                        @else
+                                                            <div class="like p-2 text-primary"><i class="fas fa-user-shield"></i><span class="ml-1">Terselamatkan</span></div> 
+                                                        @endif
                                                     @endif
                                                     <div class="like p-2 "><i class="far fa-thumbs-up"></i><span class="ml-1">Like</span></div>
                                                     <div class="like p-2 "><a class="text-dark" data-toggle="collapse" href="#comment-container-{{$post->id}}" role="button" aria-expanded="false" aria-controls="comment-container-collapse"><i class="far fa-comments"></i><span class="ml-1">Comment</span></a></div>

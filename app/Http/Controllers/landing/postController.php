@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\landing;
 
 use App\Adopt;
+use App\AnimalSave;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ class postController extends Controller
                 $adopt = new Adopt();
                 $adopt->post_id = $post->id;
                 $adopt->save();
+            } elseif ($request->category == "Penyelamatan") {
+                $save = new AnimalSave();
+                $save->post_id = $post->id;
+                $save->save();
             }
 
             return redirect()->back()->with('success', 'Posttingan berhasil disimpan, tunggu validasi admin');
