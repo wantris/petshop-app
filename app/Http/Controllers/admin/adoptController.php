@@ -50,7 +50,7 @@ class adoptController extends Controller
                 "status" => 1,
                 "message" => $message,
             ]);
-            return redirect()->route('admin.adopt.index')->with('success',);
+            return redirect()->route('admin.adopt.index')->with('success', $message);
         } catch (\Throwable $err) {
             return response()->json([
                 "status" => 0,
