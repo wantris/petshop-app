@@ -97,21 +97,33 @@
                                     <p class="comment-text">{{$post->content}}</p>
                                 </div>
                                 <div class="mb-2 d-flex text-center">
-                                    @if (!$post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
+                                    @if ($post->adoptRef->is_validated_owner == 0 && !$post->adoptRef->is_validated_admin)
                                         <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Menunggu pengadopsi">
                                             <i class="far fa-clock"></i>
                                         </button>
-                                    @elseif($post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
+                                    @elseif($post->adoptRef->is_validated_owner == 1 && !$post->adoptRef->is_validated_admin)
+                                        <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Menunggu pengadopsi menjemput">
+                                            <i class="fas fa-hourglass-start"></i>
+                                        </button>
+                                    @elseif($post->adoptRef->is_validated_owner == 2 && !$post->adoptRef->is_validated_admin)
+                                        <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Pengadopsi sedang menjemput">
+                                            <i class="fas fa-car"></i>
+                                        </button>
+                                    @elseif($post->adoptRef->is_validated_owner == 3 && !$post->adoptRef->is_validated_admin)
                                         <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Menunggu validasi admin">
                                             <i class="fas fa-user-shield"></i>
                                         </button>
-                                    @else
+                                    @elseif($post->adoptRef->is_validated_owner == 3 && $post->adoptRef->is_validated_admin)
                                         <button type="button" class="btn btn-success mr-2" data-toggle="tooltip" data-placement="bottom" title="Sudah teradopsi">
                                             <i class="far fa-check-circle"></i>
                                         </button>
                                     @endif
-                                    
-                                    <a href="{{route('pengguna.adopt.index.submission.list',['adoptid' => $post->adoptRef->id])}}" data-toggle="tooltip" data-placement="bottom" title="Daftar Pengajuan Adopsi" class="btn btn-primary mr-2"><i class="fas fa-clipboard-list"></i></a>
+                                    <a href="{{route('pengguna.adopt.index.submission.list',['adoptid' => $post->adoptRef->id])}}" data-toggle="tooltip" data-placement="bottom" title="Daftar Pengajuan Adopsi" class="btn btn-info mr-2"><i class="fas fa-clipboard-list"></i></a>
+                                    @if ($post->adoptRef->is_validated_owner == 2 && !$post->adoptRef->is_validated_admin)
+                                        <button type="button" class="btn btn-primary mr-2" onclick="validateJemput({{$post->adoptRef->id}})" data-toggle="tooltip" data-placement="bottom" title="Validasi Penjemputan">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -137,6 +149,42 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        const validateJemput = (adopt_id) => {
+            event.preventDefault();
+            let url = "/account/adopt/list/submission/validatejemput";
+            let msg = "Apakah anda yakin ingin memvalidasi penjemputan?";
+
+            Notiflix.Confirm.Show( 
+                'Adopsi',
+                msg,
+                'Yes',
+                'No',
+                function(){ 
+                    $.ajax(
+                        {
+                            url: url,
+                            type: 'post', 
+                            dataType: "JSON",
+                            data: {
+                                "adopt_id": adopt_id ,
+                                'status': 3
+                            },
+                            success: function (response){
+                                if(response.status == 1){
+                                    Notiflix.Notify.Success(response.message);
+                                    location.reload();
+                                }
+                            },
+                            error: function(xhr) {
+                                console.log(xhr);
+                                Notiflix.Notify.Failure('Ooopss');
+                            }
+                    });
+                }, function(){
+                    // No button callback alert('If you say so...'); 
+                } ); 
+        }
     </script>
 
 

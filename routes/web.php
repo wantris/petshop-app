@@ -100,6 +100,8 @@ Route::group(['prefix' => 'account'], function () {
 
     Route::get('/adopt/list', 'landing\adoptController@index')->name('pengguna.adopt.index');
     Route::get('/adopt/list/submission', 'landing\adoptController@listSubmission')->name('pengguna.adopt.index.submission.list');
+    Route::post('/adopt/list/submission/jemput', 'landing\adoptController@Jemput')->name('pengguna.adopt.index.submission.jemput');
+    Route::post('/adopt/list/submission/validatejemput', 'landing\adoptController@validateJemput')->name('pengguna.adopt.index.submission.validatejemput');
     Route::post('/adopt/list/submission/accept', 'landing\adoptController@acceptSubmission')->name('pengguna.adopt.index.submission.accept');
 
     Route::get('/adopt/mysubmission', 'landing\adoptController@userSubmissions')->name('pengguna.adopt.submission.index');

@@ -66,7 +66,7 @@
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Umum')" href="#">Umum</a>
-                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Adopsi')" href="#">Adopsi</a>
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Adopsi')" href="#">Buka Adopsi</a>
                                                                         <a class="dropdown-item" style="font-size: 13px" onclick="chooseCategory('Penyelamatan')" href="#">Penyelamatan</a>
                                                                     </div>
                                                                     <input type="hidden" name="category" id="category-inp">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Adopt;
 use App\Http\Controllers\Controller;
 use App\Message;
 use App\Post;
@@ -19,6 +20,15 @@ class dashboardController extends Controller
         $feed_count = Post::get()->count();
         $user_count = User::get()->count();
         $msg_count = Message::get()->count();
-        return view('admin.dashboard', compact('title', 'headerTitle', 'info_count', 'feed_count', 'user_count', 'msg_count'));
+        $adopt_count = Adopt::get()->count();
+        return view('admin.dashboard', compact(
+            'title',
+            'headerTitle',
+            'info_count',
+            'feed_count',
+            'user_count',
+            'msg_count',
+            'adopt_count'
+        ));
     }
 }

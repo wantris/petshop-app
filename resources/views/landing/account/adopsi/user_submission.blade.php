@@ -99,12 +99,20 @@
                                 <div class="mb-4 text-center">
                                     @foreach ($post->adoptRef->formRef as $submission)
                                         @if ($submission->adopter_id == Session::get('id_pengguna') && $submission->checked == 1)
-                                                @if($post->adoptRef->is_validated_owner && !$post->adoptRef->is_validated_admin)
-                                                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Menunggu validasi admin">
+                                                @if($post->adoptRef->is_validated_owner == 1 && !$post->adoptRef->is_validated_admin)
+                                                    <button type="button" class="btn btn-success btn-block" onclick="Jemput({{$post->adoptRef->id}})" data-toggle="tooltip" data-placement="bottom" title="Jemput hewan">
+                                                        <i class="fas fa-caret-square-up"></i>
+                                                    </button>
+                                                @elseif($post->adoptRef->is_validated_owner == 2 && !$post->adoptRef->is_validated_admin)
+                                                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Sedang menjemput hewan">
+                                                        <i class="fas fa-car"></i>
+                                                    </button>
+                                                @elseif($post->adoptRef->is_validated_owner == 3 && !$post->adoptRef->is_validated_admin)
+                                                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Menunggu valdiasi admin">
                                                         <i class="fas fa-user-shield"></i>
                                                     </button>
-                                                @elseif($post->adoptRef->is_validated_owner && $post->adoptRef->is_validated_admin)
-                                                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Berhasil teradopsi">
+                                                @elseif($post->adoptRef->is_validated_owner == 3 && $post->adoptRef->is_validated_admin)
+                                                    <button type="button" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="bottom" title="Menunggu valdiasi admin">
                                                         <i class="far fa-check-circle"></i>
                                                     </button>
                                                 @endif
@@ -142,6 +150,42 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+
+        const Jemput = (adopt_id) => {
+            event.preventDefault();
+            let url = "/account/adopt/list/submission/jemput";
+            let msg = "Apakah anda yakin ingin menjemput hewan?";
+
+            Notiflix.Confirm.Show( 
+                'Adopsi',
+                msg,
+                'Yes',
+                'No',
+                function(){ 
+                    $.ajax(
+                        {
+                            url: url,
+                            type: 'post', 
+                            dataType: "JSON",
+                            data: {
+                                "adopt_id": adopt_id ,
+                                'status': 2
+                            },
+                            success: function (response){
+                                if(response.status == 1){
+                                    Notiflix.Notify.Success(response.message);
+                                    location.reload();
+                                }
+                            },
+                            error: function(xhr) {
+                                console.log(xhr);
+                                Notiflix.Notify.Failure('Ooopss');
+                            }
+                    });
+                }, function(){
+                    // No button callback alert('If you say so...'); 
+                } ); 
+            }
     </script>
 
 

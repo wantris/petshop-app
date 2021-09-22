@@ -57,6 +57,44 @@ class adoptController extends Controller
         return redirect()->back()->with('failed', 'Pengajuan tidak ada');
     }
 
+    public function Jemput(Request $request)
+    {
+        $adopt = Adopt::where('id', $request->adopt_id)->first();
+        if ($adopt) {
+            $adopt->is_validated_owner = $request->status;
+            $adopt->save();
+
+            return response()->json([
+                "status" => 1,
+                "message" => "Sedang menjemput",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 0,
+            "message" => "Adopsi tidak ada",
+        ]);
+    }
+
+    public function validateJemput(Request $request)
+    {
+        $adopt = Adopt::where('id', $request->adopt_id)->first();
+        if ($adopt) {
+            $adopt->is_validated_owner = $request->status;
+            $adopt->save();
+
+            return response()->json([
+                "status" => 1,
+                "message" => "Penjemputan berhasil di validasi",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 0,
+            "message" => "Adopsi tidak ada",
+        ]);
+    }
+
     public function userSubmissions()
     {
         $pengguna = User::find(Session::get('id_pengguna'));

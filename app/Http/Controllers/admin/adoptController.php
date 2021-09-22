@@ -14,7 +14,7 @@ class adoptController extends Controller
         $headerTitle = "Data Adopsi";
         $title = "Adopsi";
         $posts = Post::with('adoptRef')->where('category', 'Adopsi')->whereHas('adoptRef', function ($query) {
-            $query->where('is_validated_owner', 1);
+            $query->where('is_validated_owner', 3);
         })->get();
 
         return view('admin.adopt.index', compact('posts', 'headerTitle', 'title'));
@@ -50,7 +50,6 @@ class adoptController extends Controller
                 "status" => 1,
                 "message" => $message,
             ]);
-            return redirect()->route('admin.adopt.index')->with('success', $message);
         } catch (\Throwable $err) {
             return response()->json([
                 "status" => 0,

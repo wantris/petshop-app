@@ -19,16 +19,18 @@
                                     <li><a href="{{route('pengguna.information.index')}}">Artikel</a></li>
                                     @if (Session::get('is_pengguna'))
                                         <li>
+                                            @php
+                                                $pengguna = \App\User::find(Session::get('id_pengguna'));
+                                            @endphp
                                             <div class="dropdown show">
                                                 <a class="dropdown-toggle" href="#" role="button" id="navbar-menu-login"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <img src="{{asset('asset-landing/pengguna_icon2.png')}}" class="d-inline mr-1" style="width: 30px; height:30px; border-radius:20px" alt="">
+                                                    {{$pengguna->name}}
                                                     <i class="icofont-rounded-down d-inline mt-2 text-secondary" id="arrow-icon"></i>
                                                 </a>
                                                 <div class="dropdown-menu mr-4" aria-labelledby="navbar-menu-login">
-                                                    @php
-                                                        $pengguna = \App\User::find(Session::get('id_pengguna'));
-                                                    @endphp
+                                                  
                                                     <a class="dropdown-item text-center px-2 py-2" href="{{route('pengguna.account.index', $pengguna->username)}}">{{$pengguna->name}}</a>
                                                     {{-- <a class="dropdown-item text-center px-2 py-2" href="">Ganti
                                                         Password</a> --}}
