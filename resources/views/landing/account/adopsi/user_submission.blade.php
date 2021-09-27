@@ -127,6 +127,9 @@
                                     <small><i class="far fa-user mr-2"></i>{{$post->userRef->name}}</small>
                                 </div>
                             </div>
+                            <div class="card-footer bg-primary text-center" style="border-bottom-left-radius: 20px;border-bottom-right-radius: 20px">
+                                <span class="text-white" data-toggle="tooltip" data-placement="bottom" title="Kode Hewan Adopsi">{{$post->adoptRef->code}}</span>
+                            </div>
                         </div>
                     </div>
                 @endforeach

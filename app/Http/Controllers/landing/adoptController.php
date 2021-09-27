@@ -109,7 +109,8 @@ class adoptController extends Controller
         $adopt_id = request()->adoptid;
         if ($adopt_id) {
             $user = User::find(Session::get('id_pengguna'));
-            return view('landing.adopt.form', compact('adopt_id', 'user'));
+            $adopt = Adopt::find($adopt_id);
+            return view('landing.adopt.form', compact('adopt_id', 'user', 'adopt'));
         }
     }
 

@@ -346,7 +346,11 @@
 
         const chooseCategory = (type) => {
             event.preventDefault();
-            $('#category-btn').text(type);
+            if(type == "Adopsi"){
+                $('#category-btn').text("Buka "+type); 
+            }else{
+                $('#category-btn').text(type);
+            }
             $('#category-inp').val(type);
         }
      </script>

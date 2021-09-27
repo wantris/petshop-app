@@ -39,8 +39,10 @@ class postController extends Controller
             $post->save();
 
             if ($request->category == "Adopsi") {
+                $code = random_int(0000, 9999) . "-" . random_int(0000, 9999) . "-" . random_int(0000, 9999);
                 $adopt = new Adopt();
                 $adopt->post_id = $post->id;
+                $adopt->code = $code;
                 $adopt->save();
             } elseif ($request->category == "Penyelamatan") {
                 $save = new AnimalSave();

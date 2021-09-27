@@ -44,6 +44,10 @@
                             @method('post')
                             <input type="hidden" name="adopt_id" value="{{$adopt_id}}">
                             <div class="form-group">
+                                <label for="" class="text-dark">Kode Hewan Adopsi</label>
+                                <input type="text" disabled value="{{$adopt->code}}" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="" class="text-dark">Nama Lengkap</label>
                                 <input type="text" disabled placeholder="Input Nama Lengkap" value="{{$user->name}}" class="form-control">
                             </div>
