@@ -124,6 +124,12 @@ class adoptController extends Controller
         ]);
 
         try {
+            if ($request->file('ktp')) {
+                $resorcektp = $request->file('ktp');
+                $namektp   = "ktp_" . rand(0000, 9999) . "." . $resorcektp->getClientOriginalExtension();
+                $resorcektp->move(\base_path() . "/public/assets/img/foto-ktp/", $namektp);
+            }
+
             $adopt = new AdoptForm();
             $adopt->adopt_id = $request->adopt_id;
             $adopt->adopter_id = Session::get('id_pengguna');
@@ -132,6 +138,7 @@ class adoptController extends Controller
             $adopt->whatsapp_number = $request->wa_number;
             $adopt->age = $request->age;
             $adopt->email = $request->email;
+            $adopt->ktp = $namektp;
             $adopt->save();
 
             return redirect()->route('pengguna.adopt.submission.index')->with('success', 'Berhasil mengajukan adopsi');

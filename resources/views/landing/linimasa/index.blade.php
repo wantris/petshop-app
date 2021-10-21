@@ -72,6 +72,19 @@
                                                                     <input type="hidden" name="category" id="category-inp">
                                                                 </div>
                                                             </div>
+                                                            <div class="mt-2 d-none" id="animal-type-div">
+                                                                <label for="" class="mr-2">Jenis Hewan : </label>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-orange dropdown-toggle" id="animal-type-btn" style="font-size: 13px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Pilih Jenis Hewan
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseAnimalType('Kucing')" href="#">Kucing</a>
+                                                                        <a class="dropdown-item" style="font-size: 13px" onclick="chooseAnimalType('Anjing')" href="#">Anjing</a>
+                                                                    </div>
+                                                                    <input type="hidden" name="animal_type" value="Kucing" id="animal-type-inp">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <hr>
@@ -347,11 +360,25 @@
         const chooseCategory = (type) => {
             event.preventDefault();
             if(type == "Adopsi"){
-                $('#category-btn').text("Buka "+type); 
+                $('#category-btn').text("Buka "+type);
+                $('#animal-type-div').removeClass('d-flex');
+                $('#animal-type-div').addClass('d-none'); 
+            }else if(type == "Penyelamatan"){
+                $('#category-btn').text(type);
+                $('#animal-type-div').removeClass('d-none');
+                $('#animal-type-div').addClass('d-flex');
             }else{
                 $('#category-btn').text(type);
+                $('#animal-type-div').removeClass('d-flex');
+                $('#animal-type-div').addClass('d-none'); 
             }
             $('#category-inp').val(type);
+        }
+
+        const chooseAnimalType = (type) => {
+            event.preventDefault();
+            $('#animal-type-btn').text(type);
+            $('#animal-type-inp').val(type);
         }
      </script>
 

@@ -83,23 +83,34 @@
                                     <p class="comment-text">{{$post->content}}</p>
                                 </div>
                                 <div class="mb-2">
-                                    <form action="{{route('pengguna.animalsave.updatestatus')}}" method="post">
-                                        @csrf
-                                        @if (!$post->saveRef->status)
-                                            <input type="hidden" name="status" value="1">
-                                            <input type="hidden" name="save_id" value="{{$post->saveRef->id}}">
-                                            <button type="submit" class="btn btn-primary btn-block">
-                                                Buat sudah terselamatkan
+                                    @if ($post->saveRef->status == 0)
+                                        <button type="button" class="btn btn-danger btn-block">
+                                            Belum Tervalidasi
+                                        </button>
+                                    @elseif ($post->saveRef->status == 1)
+                                        <button type="button" class="btn btn-success btn-block">
+                                            Sudah Tervalidasi
+                                        </button>
+                                    @elseif ($post->saveRef->status == 2)
+                                        <button type="button" class="btn btn-info btn-block">
+                                            Sedang Diselamatkan
+                                        </button>
+                                        <form action="{{route('pengguna.animalsave.updatestatus')}}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary btn-block mt-2">
+                                                Validasi Penyelamatan
                                             </button>
-                                        @else
-                                            <input type="hidden" name="status" value="0">
-                                            <input type="hidden" name="save_id" value="{{$post->saveRef->id}}">
-                                            <button type="submit" class="btn btn-success btn-block">
-                                                Terselamatkan
-                                            </button>
-                                        @endif
-                                    </form>
+                                        </form>
+                                        
+                                    @elseif ($post->saveRef->status == 3)
+                                        <button type="button" class="btn btn-success btn-block">
+                                            Sudah Terselamatkan
+                                        </button>
+                                    @endif
                                 </div>
+                            </div>
+                            <div class="card-footer text-left bg-primary text-white" style="border-bottom-left-radius: 20px;border-bottom-right-radius: 20px">
+                                <small><i class="far fa-clock mr-2"></i>{{$post->created_at->isoFormat('D MMMM Y')}}</small>
                             </div>
                         </div>
                     </div>

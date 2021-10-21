@@ -39,7 +39,7 @@
             <div class="col-md-6 o offset-md-3 white-bg pad-4">
                 <div class="card shadow-sm" style="border-radius:20px">
                     <div class="card-body">
-                        <form action="{{route('pengguna.adopt.form.save')}}" method="post">
+                        <form action="{{route('pengguna.adopt.form.save')}}" enctype="multipart/form-data" method="post">
                             @csrf
                             @method('post')
                             <input type="hidden" name="adopt_id" value="{{$adopt_id}}">
@@ -84,6 +84,13 @@
                                 <textarea name="address" class="form-control">{{old('address')}}</textarea>
                                 @if ($errors->has('address'))
                                     <span class="text-danger">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="text-dark">Foto KTP</label>
+                                <input type="file" name="ktp" class="form-control">
+                                @if ($errors->has('ktp'))
+                                    <span class="text-danger">{{ $errors->first('ktp') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">

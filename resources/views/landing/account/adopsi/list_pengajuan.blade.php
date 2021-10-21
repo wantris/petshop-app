@@ -167,6 +167,12 @@
 
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="">Foto KTP</label>
+                        <div class="mt-2" >
+                            <img src="" alt="Foto KTP" class="img-fluid" id="ktp-image">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -193,6 +199,7 @@
         const seeDetail = (item) =>{
             event.preventDefault();
             let link = `https://wa.me/${item.whatsapp_number}?text=Apakah anda yakin ingi mengadopsi hewan peliharaan saya?`;
+            let base_url = "{{url('/assets/img/foto-ktp/')}}/"+item.ktp;
 
             $('#name-text').val(item.user_ref.name);
             $('#age-text').val(item.age+" Tahun");
@@ -202,6 +209,9 @@
             $("#link-wa-text").attr("href", link)
             $('#email-text').val(item.email);
             $('#alamat-text').text(item.address);
+
+            // add image
+            $('#ktp-image').attr('src', base_url);
         }
     </script>
 

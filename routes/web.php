@@ -55,6 +55,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/fetch/{room_id}', 'admin\messageController@fetchByRoom')->name('admin.message.fetch.byroom');
         Route::post('/validate', 'admin\messageController@validatemessage')->name('admin.message.validate');
     });
+
+    Route::group(['prefix' => 'animalsave'], function () {
+        Route::get('/', 'admin\animalSaveController@index')->name('admin.animalsave.index');
+        Route::post('/changestatus', 'admin\animalSaveController@changeStatus')->name('admin.animalsave.changestatus');
+    });
 });
 
 

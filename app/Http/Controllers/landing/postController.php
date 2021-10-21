@@ -38,6 +38,8 @@ class postController extends Controller
             $post->admin_id = null;
             $post->save();
 
+            $msg = "Postingan berhasil disimpan, tunggu validasi admin";
+
             if ($request->category == "Adopsi") {
                 $code = random_int(0000, 9999) . "-" . random_int(0000, 9999) . "-" . random_int(0000, 9999);
                 $adopt = new Adopt();
@@ -47,10 +49,13 @@ class postController extends Controller
             } elseif ($request->category == "Penyelamatan") {
                 $save = new AnimalSave();
                 $save->post_id = $post->id;
+                $save->type = $request->animal_type;
                 $save->save();
+
+                $msg = "Penyelamatan hewan berhasil diajukan ke admin";
             }
 
-            return redirect()->back()->with('success', 'Posttingan berhasil disimpan, tunggu validasi admin');
+            return redirect()->back()->with('success', $msg);
         } catch (\Throwable $err) {
             return $err;
         }
