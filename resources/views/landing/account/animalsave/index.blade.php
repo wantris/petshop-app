@@ -97,6 +97,7 @@
                                         </button>
                                         <form action="{{route('pengguna.animalsave.updatestatus')}}" method="post">
                                             @csrf
+                                            <input type="hidden" name="save_id" value="{{$post->saveRef->id}}">
                                             <input type="hidden" name="status" value="3">
                                             <button type="submit" class="btn btn-primary btn-block mt-2">
                                                 Validasi Penyelamatan
